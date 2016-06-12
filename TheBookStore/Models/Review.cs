@@ -7,5 +7,6 @@
         public int Rating { get; set; }
         public string FeedBack { get; set; }
         public virtual Book Book { get; set; }
+        public int BookId { get; set; }
     }
 }

@@ -17,13 +17,20 @@ namespace TheBookStore.App_Start
                 config.CreateMap<Book, BookDto>()
                     .ForMember(b => b.Authors, m => m.MapFrom(a => a.Authors));
 
-                
-            });
-            //Mapper.CreateMap<Book, BookDto>()
-            //    .ForMember(b => b.Authors, m => m.MapFrom(a => a.Authors));
-            //Mapper.CreateMap<Author, BookAuthorsDto>()
-            //    .ForMember(b => b.FullName, m => m.MapFrom(a => a.Name + " " + a.Surname))
-            //    .ForSourceMember(b => b.Books, m => m.Ignore());
+                config.CreateMap<Author, BookAuthorsDto>()
+                    .ForMember(b => b.FullName, m => m.MapFrom(a => a.Name + " " + a.Surname))
+                    .ForSourceMember(b => b.Books, m => m.Ignore());
+
+                config.CreateMap<Author, AuthorBooksDto>();
+
+                config.CreateMap<Author, AuthorDto>()
+                    .ForMember(b => b.FullName, m => m.MapFrom(a => a.Name + " " + a.Surname))
+                    .ForMember(a => a.Books, m => m.MapFrom(b => b.Books))
+                    .ForMember(a => a.Books, m => m.Ignore());
+
+                config.CreateMap<Review, ReviewDto>()
+                    .ForMember(r => r.BookId, m => m.MapFrom(s => s.BookId));
+            });           
         }
     }
 }
